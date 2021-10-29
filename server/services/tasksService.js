@@ -8,7 +8,10 @@ const addTask = async (description, name) => {
   return response;
 };
 
+const deleteTask = async (id) => models.deleteTask(id);
+
 module.exports = {
   getAllTasks,
   addTask,
+  deleteTask,
 };
