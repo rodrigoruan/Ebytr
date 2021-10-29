@@ -5,10 +5,10 @@ const cors = require('cors');
 require('dotenv').config({ path: './config.env' });
 
 const port = process.env.PORT || 5000;
+const routes = require('./controllers/tasksController');
+
 app.use(cors());
 app.use(express.json());
-app.use(require('./controllers/tasksController'));
+app.use(routes);
 
-app.listen(port, () => {
-  console.log(`Server is running on port: ${port}`);
-});
+app.listen(port);
