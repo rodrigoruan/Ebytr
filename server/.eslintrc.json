@@ -12,7 +12,7 @@
         "ecmaFeatures": {
             "jsx": true
         },
-        "ecmaVersion": 7
+        "ecmaVersion": 12
     },
     "plugins": [
         "react"
