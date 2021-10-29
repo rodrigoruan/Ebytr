@@ -8,4 +8,10 @@ routes.get('/', async (_req, res) => {
   res.status(200).json(response);
 });
 
+routes.post('/', async (req, res) => {
+  const { description, name } = req.body;
+  const response = await services.addTask(description, name);
+  res.status(200).json(response);
+});
+
 module.exports = routes;
