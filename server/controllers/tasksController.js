@@ -20,4 +20,11 @@ routes.delete('/:id', async (req, res) => {
   res.status(200).json(response);
 });
 
+routes.put('/:id', async (req, res) => {
+  const { id } = req.params;
+  const { description, name } = req.body;
+  const response = await services.editTask(id, description, name);
+  res.status(200).json(response);
+});
+
 module.exports = routes;

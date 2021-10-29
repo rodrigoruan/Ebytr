@@ -12,11 +12,21 @@ const addTask = async (description, name, momentDate) => connection()
     momentDate,
   }));
 
-const deleteTask = async (id) => connection().then((db) => db.collection('tasks').deleteOne({ _id: ObjectID(id) }))
+const deleteTask = async (id) => connection()
+  .then((db) => db.collection('tasks').deleteOne({ _id: ObjectID(id) }))
   .then(() => ({ id }));
+
+const editTask = async (id, description, name) => connection()
+  .then((db) => db
+    .collection('tasks')
+    .findOneAndUpdate({ _id: ObjectID(id) }, { $set: { name, description } }))
+  .then(({ value: { momentDate } }) => ({
+    id, description, name, momentDate,
+  }));
 
 module.exports = {
   getAllTasks,
   addTask,
   deleteTask,
+  editTask,
 };

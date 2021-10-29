@@ -10,8 +10,11 @@ const addTask = async (description, name) => {
 
 const deleteTask = async (id) => models.deleteTask(id);
 
+const editTask = async (id, description, name) => models.editTask(id, description, name);
+
 module.exports = {
   getAllTasks,
   addTask,
   deleteTask,
+  editTask,
 };
