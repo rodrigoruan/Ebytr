@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import editTask from '../api/editTask';
+import deleteTask from '../api/deleteTask';
 
 import Modal from './Modal';
 
@@ -36,7 +37,9 @@ function Task({
           <img width="25px" src={Edit} alt="Edit icon" />
         </button>
 
-        <img width="25px" src={Trash} alt="Trash icon" />
+        <button onClick={() => deleteTask(id, fetch)} type="button">
+          <img width="25px" src={Trash} alt="Trash icon" />
+        </button>
       </div>
     </div>
   );
