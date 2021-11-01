@@ -26,10 +26,7 @@ routes.post('/login', async (req, res) => {
     return res.status(400).json(response);
   }
 
-  const token = jwt.sign({ data: email }, SECRET, {
-    expiresIn: '7d',
-    algorithm: 'HS256',
-  });
+  const token = jwt.sign({ data: email }, SECRET);
 
   res.status(200).json(token);
 });
@@ -49,10 +46,7 @@ routes.post('/login/admin', async (req, res) => {
     email, password,
   } = req.body;
 
-  const token = jwt.sign({ data: email }, SECRET, {
-    expiresIn: '7d',
-    algorithm: 'HS256',
-  });
+  const token = jwt.sign({ data: email }, SECRET);
 
   const response = await services.loginAdmin(email, password);
 

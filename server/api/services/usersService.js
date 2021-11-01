@@ -4,14 +4,11 @@ const {
   validateEmailFormat,
 } = require('../validations/validations');
 
-const errorMessage = {
-  invalidData: { error: 'invalid data' },
-  invalidCode: { error: 'invalid special code' },
-};
+const errorMessage = { error: 'invalid data' };
 
 const createUser = async (email, name, password) => {
   if (validateData(email, name, password) || validateEmailFormat(email)) {
-    return errorMessage.invalidData;
+    return errorMessage;
   }
 
   const response = await models.createUser(email, name, password);
@@ -21,7 +18,7 @@ const createUser = async (email, name, password) => {
 
 const loginUser = async (email, password) => {
   if (validateData(email, password) || validateEmailFormat(email)) {
-    return errorMessage.invalidData;
+    return errorMessage;
   }
 
   const response = await models.loginUser(email, password);
@@ -30,12 +27,12 @@ const loginUser = async (email, password) => {
 };
 
 const createAdmin = async (email, password, name, code) => {
-  if (validateData(email, password, name) || validateEmailFormat(email)) {
-    return errorMessage.invalidData;
-  }
-
-  if (code !== 'xablau') {
-    return errorMessage.invalidCode;
+  if (
+    validateData(email, password, name)
+    || validateEmailFormat(email)
+    || code !== 'xablau'
+  ) {
+    return errorMessage;
   }
 
   const response = await models.createAdmin(email, password, name);
@@ -45,7 +42,7 @@ const createAdmin = async (email, password, name, code) => {
 
 const loginAdmin = async (email, password) => {
   if (validateData(email, password) || validateEmailFormat(email)) {
-    return errorMessage.invalidData;
+    return errorMessage;
   }
 
   const response = await models.createAdmin(email, password);
