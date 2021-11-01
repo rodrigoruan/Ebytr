@@ -9,21 +9,24 @@ routes.get('/', async (_req, res) => {
 });
 
 routes.post('/', async (req, res) => {
-  const { description, name, token } = req.body;
-  const response = await services.addTask(description, name);
-  res.status(204).json(response);
+  const { description, name, email } = req.body;
+  const response = await services.addTask(description, name, email);
+  res.status(200).json(response);
 });
 
 routes.delete('/:id', async (req, res) => {
   const { id } = req.params;
-  const response = await services.deleteTask(id);
-  res.status(200).json(response);
+  const { email } = req.body;
+  const token = req.headers.authorization;
+  const response = await services.deleteTask(id, token, email);
+  res.status(204).json(response);
 });
 
 routes.put('/:id', async (req, res) => {
   const { id } = req.params;
-  const { description, name } = req.body;
-  const response = await services.editTask(id, description, name);
+  const { description, name, email } = req.body;
+  const token = req.headers.authorization;
+  const response = await services.editTask(id, description, name, email, token);
   res.status(200).json(response);
 });
 

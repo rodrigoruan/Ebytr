@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import loginUser from '../api/services';
+import loginUser from '../api/loginUser';
 
 function Login() {
   const [email, setEmail] = React.useState('');
@@ -8,8 +8,8 @@ function Login() {
   const [redirect, setRedirect] = React.useState(false);
 
   React.useEffect(() => {
-    const storage = localStorage.getItem('token');
-    if (storage) setRedirect(true);
+    const token = JSON.parse(localStorage.getItem('token'));
+    if (token) setRedirect(true);
   }, []);
 
   if (redirect) return <Redirect to="/home" />;

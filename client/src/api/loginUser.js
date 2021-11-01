@@ -5,8 +5,11 @@ const loginUser = async (email, password, callback) => {
     email,
     password,
   });
+
   if (token) callback(true);
-  localStorage.setItem('token', token.data);
+
+  const valuesToStore = Object.entries(token.data);
+  valuesToStore.forEach((value) => localStorage.setItem(value[0], value[1]));
 };
 
 export default loginUser;

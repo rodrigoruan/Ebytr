@@ -1,18 +1,29 @@
 import React from 'react';
 import axios from 'axios';
 import Task from '../components/Task';
+import addTask from '../api/addTask';
 
 function Home() {
   const [data, setData] = React.useState(null);
   const [logged, setLogged] = React.useState(false);
+  const [taskDescription, setTaskDescription] = React.useState('');
+  const [name, setName] = React.useState('');
 
-  React.useEffect(() => {
-    const storage = localStorage.getItem('token');
-    if (storage) setLogged(true);
-
+  const fetchTasksFromApi = () => {
     axios
       .get('http://localhost:5000/')
       .then((response) => setData(response.data));
+  };
+
+  React.useEffect(() => {
+    const token = localStorage.getItem('token');
+    const storageName = localStorage.getItem('name');
+    if (token) setLogged(true);
+    setName(storageName);
+  }, []);
+
+  React.useEffect(() => {
+    fetchTasksFromApi();
   }, []);
 
   if (!data) return <div>Loading...</div>;
@@ -20,8 +31,14 @@ function Home() {
 
   return (
     <div>
-      <input placeholder="Add a task here..." />
-      <button type="button">Add</button>
+      <p>{name}</p>
+      <input
+        placeholder="Add a task here..."
+        onChange={({ target }) => setTaskDescription(target.value)}
+      />
+      <button type="button" onClick={() => addTask(taskDescription, fetchTasksFromApi)}>
+        Add
+      </button>
       <div>
         {data.map((task) => (
           <Task

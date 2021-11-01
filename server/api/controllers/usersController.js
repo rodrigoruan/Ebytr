@@ -9,11 +9,8 @@ const services = require('../services/usersService');
 
 routes.post('/create', async (req, res) => {
   const { email, name, password } = req.body;
-
   const response = await services.createUser(email, name, password);
-
   const CODE = response.error ? 400 : 200;
-
   res.status(CODE).json(response);
 });
 
@@ -27,8 +24,7 @@ routes.post('/login', async (req, res) => {
   }
 
   const token = jwt.sign({ data: email }, SECRET);
-
-  res.status(200).json(token);
+  res.status(200).json({ token, name: response.name, email });
 });
 
 routes.post('/create/admin', async (req, res) => {
@@ -38,23 +34,11 @@ routes.post('/create/admin', async (req, res) => {
 
   const response = await services.createAdmin(email, password, name, code);
 
-  res.status(200).json(response);
-});
-
-routes.post('/login/admin', async (req, res) => {
-  const {
-    email, password,
-  } = req.body;
-
-  const token = jwt.sign({ data: email }, SECRET);
-
-  const response = await services.loginAdmin(email, password);
-
   if (response.error) {
     return res.status(400).json(response);
   }
 
-  res.status(200).json(token);
+  res.status(200).json(response);
 });
 
 module.exports = routes;

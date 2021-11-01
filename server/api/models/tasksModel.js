@@ -3,8 +3,10 @@ const connection = require('./connection');
 
 const getAllTasks = async () => connection().then((db) => db.collection('tasks').find().toArray());
 
-const addTask = async (description, name, momentDate) => connection()
-  .then((db) => db.collection('tasks').insertOne({ description, name, momentDate }))
+const addTask = async (description, name, email, momentDate) => connection()
+  .then((db) => db.collection('tasks').insertOne({
+    description, name, email, momentDate,
+  }))
   .then((response) => ({
     _id: response.insertedId,
     description,
@@ -19,9 +21,15 @@ const deleteTask = async (id) => connection()
 const editTask = async (id, description, name) => connection()
   .then((db) => db
     .collection('tasks')
-    .findOneAndUpdate({ _id: ObjectID(id) }, { $set: { name, description } }))
+    .findOneAndUpdate(
+      { _id: ObjectID(id) },
+      { $set: { name, description } },
+    ))
   .then(({ value: { momentDate } }) => ({
-    id, description, name, momentDate,
+    id,
+    description,
+    name,
+    momentDate,
   }));
 
 module.exports = {
