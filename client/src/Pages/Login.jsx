@@ -1,6 +1,9 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import loginUser from '../api/loginUser';
+import '../css/Login.css';
+
+import TodoIcon from '../imgs/todoIcon.svg';
 
 function Login() {
   const [email, setEmail] = React.useState('');
@@ -15,21 +18,34 @@ function Login() {
   if (redirect) return <Redirect to="/home" />;
 
   return (
-    <div>
+    <div className="login-container">
+      <img src={TodoIcon} alt="todo icon" />
+
+      <h1 className="login-title">PLEASE SIGN IN</h1>
+
       <input
-        placeholder="Email"
+        placeholder="Email Address"
         onChange={({ target }) => setEmail(target.value)}
       />
       <input
         placeholder="Password"
         onChange={({ target }) => setPassword(target.value)}
+        type="password"
       />
       <button
         onClick={() => loginUser(email, password, setRedirect)}
         type="button"
       >
-        LOGAR
+        Log In
       </button>
+
+      <p>
+        Don&lsquo;t have an account?
+        {' '}
+        <Link to="/register" className="register-button">
+          Join Now
+        </Link>
+      </p>
     </div>
   );
 }

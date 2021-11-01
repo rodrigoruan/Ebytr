@@ -35,14 +35,14 @@ function Home() {
   }, []);
 
   if (!data) return <div>Loading...</div>;
-  if (!logged) return <div>Usuário não logado</div>;
+  if (!logged) return <div>User not logged</div>;
 
   return (
     <div>
       <header>
         <p>{name}</p>
         <button type="button" onClick={() => logOutUser()}>
-          Desconectar
+          LogOut
         </button>
       </header>
 
