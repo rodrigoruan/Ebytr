@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 import Task from '../components/Task';
 import addTask from '../api/addTask';
 
@@ -8,11 +9,18 @@ function Home() {
   const [logged, setLogged] = React.useState(false);
   const [taskDescription, setTaskDescription] = React.useState('');
   const [name, setName] = React.useState('');
+  const history = useHistory();
 
   const fetchTasksFromApi = () => {
     axios
       .get('http://localhost:5000/')
       .then((response) => setData(response.data));
+  };
+
+  const logOutUser = () => {
+    localStorage.clear();
+    setLogged(false);
+    history.push('/');
   };
 
   React.useEffect(() => {
@@ -31,7 +39,13 @@ function Home() {
 
   return (
     <div>
-      <p>{name}</p>
+      <header>
+        <p>{name}</p>
+        <button type="button" onClick={() => logOutUser()}>
+          Desconectar
+        </button>
+      </header>
+
       <input
         placeholder="Add a task here..."
         onChange={({ target }) => setTaskDescription(target.value)}
@@ -44,7 +58,13 @@ function Home() {
       </button>
       <div>
         {data.map(({ description, name: task, _id: id }) => (
-          <Task key={id} description={description} name={task} id={id} fetch={fetchTasksFromApi} />
+          <Task
+            key={id}
+            description={description}
+            name={task}
+            id={id}
+            fetch={fetchTasksFromApi}
+          />
         ))}
       </div>
     </div>
