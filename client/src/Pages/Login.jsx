@@ -1,6 +1,6 @@
 import React from 'react';
-import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import loginUser from '../api/services';
 
 function Login() {
   const [email, setEmail] = React.useState('');
@@ -11,17 +11,6 @@ function Login() {
     const storage = localStorage.getItem('token');
     if (storage) setRedirect(true);
   }, []);
-
-  const loginUser = async () => {
-    const token = await axios.post('http://localhost:5000/users/login', {
-      email,
-      password,
-    });
-
-    if (token) setRedirect(true);
-
-    localStorage.setItem('token', token.data);
-  };
 
   if (redirect) return <Redirect to="/home" />;
 
@@ -35,7 +24,10 @@ function Login() {
         placeholder="Password"
         onChange={({ target }) => setPassword(target.value)}
       />
-      <button onClick={loginUser} type="button">
+      <button
+        onClick={() => loginUser(email, password, setRedirect)}
+        type="button"
+      >
         LOGAR
       </button>
     </div>

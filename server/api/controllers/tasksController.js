@@ -9,7 +9,7 @@ routes.get('/', async (_req, res) => {
 });
 
 routes.post('/', async (req, res) => {
-  const { description, name } = req.body;
+  const { description, name, token } = req.body;
   const response = await services.addTask(description, name);
   res.status(204).json(response);
 });
