@@ -43,8 +43,19 @@ const createAdmin = async (email, password, name, code) => {
   return response;
 };
 
+const loginAdmin = async (email, password) => {
+  if (validateData(email, password) || validateEmailFormat(email)) {
+    return errorMessage.invalidData;
+  }
+
+  const response = await models.createAdmin(email, password);
+
+  return response;
+};
+
 module.exports = {
   createUser,
   loginUser,
   createAdmin,
+  loginAdmin,
 };
