@@ -8,7 +8,7 @@ function Login() {
   const [redirect, setRedirect] = React.useState(false);
 
   React.useEffect(() => {
-    const token = JSON.parse(localStorage.getItem('token'));
+    const token = localStorage.getItem('token');
     if (token) setRedirect(true);
   }, []);
 

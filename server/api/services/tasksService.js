@@ -35,7 +35,7 @@ const editTask = async (id, description, name, email, token) => {
   const userIsAdmin = allAdmins.some((admin) => admin.email === email);
   const userOwnsTask = email === decodedJwt;
 
-  if (!userIsAdmin || !userOwnsTask || validateData(id, token, email)) {
+  if ((!userIsAdmin && !userOwnsTask) || validateData(id, token, email)) {
     return errorMessage;
   }
 

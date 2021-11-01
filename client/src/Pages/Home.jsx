@@ -36,16 +36,15 @@ function Home() {
         placeholder="Add a task here..."
         onChange={({ target }) => setTaskDescription(target.value)}
       />
-      <button type="button" onClick={() => addTask(taskDescription, fetchTasksFromApi)}>
+      <button
+        type="button"
+        onClick={() => addTask(taskDescription, fetchTasksFromApi)}
+      >
         Add
       </button>
       <div>
-        {data.map((task) => (
-          <Task
-            key={task.description}
-            description={task.description}
-            name={task.name}
-          />
+        {data.map(({ description, name: task, _id: id }) => (
+          <Task key={id} description={description} name={task} id={id} fetch={fetchTasksFromApi} />
         ))}
       </div>
     </div>

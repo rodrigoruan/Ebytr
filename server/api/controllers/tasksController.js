@@ -26,6 +26,7 @@ routes.put('/:id', async (req, res) => {
   const { id } = req.params;
   const { description, name, email } = req.body;
   const token = req.headers.authorization;
+  console.log(id, description, name, email, token);
   const response = await services.editTask(id, description, name, email, token);
   res.status(200).json(response);
 });
