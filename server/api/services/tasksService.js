@@ -34,9 +34,12 @@ const deleteTask = async (id, token) => {
 
 const editTask = async (id, description, name, email, token) => {
   const decodedJwt = jwt.verify(token, SECRET).data;
+  const allTasks = await getAllTasks();
   const allAdmins = await getAllAdmins();
-  const userIsAdmin = allAdmins.some((admin) => admin.email === email);
-  const userOwnsTask = email === decodedJwt;
+  const userIsAdmin = allAdmins.some((admin) => admin.email === decodedJwt);
+  const userOwnsTask = allTasks.find(
+    ({ email: taskEmail, _id: taskId }) => taskId.toString() === id && decodedJwt === taskEmail,
+  );
 
   if ((!userIsAdmin && !userOwnsTask) || validateData(id, token, email, name)) {
     return errorMessage;
