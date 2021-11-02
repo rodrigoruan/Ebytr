@@ -1,7 +1,49 @@
 .modal-container {
-  box-shadow: 0 0 30px black;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.281);
   text-align: center;
-  padding: 100px;
-  width: 70%;
   margin: 0 auto;
+  padding: 30px 0;
+  width: 60%;
+}
+
+.modal-container > h2 {
+  color: #1b1b1b;
+}
+
+.modal-container > p {
+  color: #666666;
+  margin-bottom: 10px;
+}
+
+.modal-container > input {
+  display: block;
+  margin: 0 auto;
+  border: 1px solid #666666;
+  width: 300px;
+  padding: 10px 30px;
+  outline: none;
+}
+
+.modal-container > button {
+  background: #000000;
+  width: 300px;
+  border: none;
+  padding: 11px 0;
+  margin-top: 6px;
+  cursor: pointer;
+  transition: 1s;
+  color: #ffffff;
+}
+
+.modal-container > button:hover {
+  transition: 1s;
+  background-color: #ffcc00;
+}
+
+.modal-container > label > select {
+  display: block;
+  width: 300px;
+  padding: 10px 10px;
+  margin: 5px auto 2px auto;
+  outline: none;
 }

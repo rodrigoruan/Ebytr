@@ -23,8 +23,12 @@ routes.post('/login', async (req, res) => {
     return res.status(400).json(response);
   }
 
-  const token = jwt.sign({ data: email }, SECRET);
-  res.status(200).json({ token, name: response.name, email });
+  const token = jwt.sign(
+    { data: { email, name: response.name, admin: response.admin || false } },
+    SECRET,
+  );
+
+  res.status(200).json(token);
 });
 
 routes.post('/create/admin', async (req, res) => {

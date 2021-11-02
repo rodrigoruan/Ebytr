@@ -5,7 +5,7 @@ const getAllTasks = async () => connection().then((db) => db.collection('tasks')
 
 const addTask = async (description, name, email, momentDate) => connection()
   .then((db) => db.collection('tasks').insertOne({
-    description, name, email, momentDate,
+    description, name, email, momentDate, status: 'pending',
   }))
   .then((response) => ({
     _id: response.insertedId,
@@ -18,18 +18,19 @@ const deleteTask = async (id) => connection()
   .then((db) => db.collection('tasks').deleteOne({ _id: ObjectID(id) }))
   .then(() => ({ id }));
 
-const editTask = async (id, description, name) => connection()
+const editTask = async (id, description, name, status) => connection()
   .then((db) => db
     .collection('tasks')
     .findOneAndUpdate(
       { _id: ObjectID(id) },
-      { $set: { name, description } },
+      { $set: { name, description, status } },
     ))
   .then(({ value: { momentDate } }) => ({
     id,
     description,
     name,
     momentDate,
+    status,
   }));
 
 module.exports = {

@@ -8,8 +8,7 @@ const loginUser = async (email, password, callback) => {
 
   if (token) callback(true);
 
-  const valuesToStore = Object.entries(token.data);
-  valuesToStore.forEach((value) => localStorage.setItem(value[0], value[1]));
+  localStorage.setItem('token', JSON.stringify(token.data));
 };
 
 export default loginUser;

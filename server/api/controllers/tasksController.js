@@ -16,17 +16,19 @@ routes.post('/', async (req, res) => {
 
 routes.delete('/:id', async (req, res) => {
   const { id } = req.params;
-  const { email } = req.body;
   const token = req.headers.authorization;
-  const response = await services.deleteTask(id, token, email);
+  const response = await services.deleteTask(id, token);
   res.status(204).json(response);
 });
 
 routes.put('/:id', async (req, res) => {
   const { id } = req.params;
-  const { description, name, email } = req.body;
+  const {
+    description, status,
+  } = req.body;
+
   const token = req.headers.authorization;
-  const response = await services.editTask(id, description, name, email, token);
+  const response = await services.editTask(id, description, token, status);
   res.status(200).json(response);
 });
 

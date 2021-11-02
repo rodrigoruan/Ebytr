@@ -1,0 +1,20 @@
+<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+ <title/>
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path fill="none" stroke="#666666" stroke-linecap="round" stroke-linejoin="round" id="_Path_" d="m17.5,22.5l-14.5,0c-0.828,0 -1.5,-0.672 -1.5,-1.5l0,-16c0,-0.828 0.672,-1.5 1.5,-1.5l18,0c0.828,0 1.5,0.672 1.5,1.5l0,12.5"/>
+  <circle fill="none" stroke="#666666" stroke-linecap="round" stroke-linejoin="round" r="0.5" id="_Path_2" cy="6" cx="7"/>
+  <circle fill="none" stroke="#666666" stroke-linecap="round" stroke-linejoin="round" r="0.5" id="_Path_3" cy="6" cx="17"/>
+  <line fill="none" stroke="#666666" stroke-linecap="round" stroke-linejoin="round" y2="1.5" y1="6" x2="7.5" x1="7.5" id="_Path_4"/>
+  <line fill="none" stroke="#666666" stroke-linecap="round" stroke-linejoin="round" y2="1.5" y1="6" x2="17.5" x1="17.5" id="_Path_5"/>
+  <line fill="none" stroke="#666666" stroke-linecap="round" stroke-linejoin="round" y2="8.5" y1="8.5" x2="22.5" x1="1.5" id="_Path_6"/>
+  <path fill="none" stroke="#666666" stroke-linecap="round" stroke-linejoin="round" id="_Path_7" d="m22.5,17.5l-3.5,0c-0.828,0 -1.5,0.672 -1.5,1.5l0,3.5l5,-5z"/>
+  <path fill="none" stroke="#666666" stroke-linecap="round" stroke-linejoin="round" id="_Path_8" d="m7.5,14l0,0c0,-0.828 0.672,-1.5 1.5,-1.5l0,0c0.828,0 1.5,0.672 1.5,1.5l0,0c0.001,0.646 -0.23,1.27 -0.65,1.76l-2.35,2.74l3,0"/>
+  <path id="svg_2" fill="none" stroke="#666666" stroke-linecap="round" stroke-linejoin="round" d="m15.5,12.5l-2.5,0l-0.5,3l0,0c0.32,-0.322 0.756,-0.502 1.21,-0.5l0.09,0c0.939,-0.006 1.704,0.751 1.71,1.69c0,0.003 0,0.007 0,0.01l0,0.3c0,0.828 -0.672,1.5 -1.5,1.5c-0.003,0 -0.007,0 -0.01,0l0,0c-0.828,0 -1.5,-0.672 -1.5,-1.5"/>
+ </g>
+</svg>

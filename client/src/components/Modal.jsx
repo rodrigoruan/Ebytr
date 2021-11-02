@@ -4,24 +4,35 @@ import editTask from '../api/editTask';
 import '../css/Modal.css';
 
 function Modal({
-  description, name, id, fetch, setModal,
+  description, name, id, fetch, setModal, status,
 }) {
   const [newDescription, setNewDescription] = React.useState('');
+  const [taskStatus, setTaskStatus] = React.useState('pending');
 
-  const verifyTaskAndEdit = () => newDescription && editTask(newDescription, fetch, id, setModal);
+  const verifyTaskAndEdit = () => {
+    if (newDescription) editTask(newDescription, fetch, id, setModal, taskStatus);
+  };
 
   return (
     <div className="modal-container">
       <h2>{description}</h2>
-      <p>{name}</p>
+      <p>{`${name} / ${status}`}</p>
       <input
         placeholder="New description"
         onChange={({ target }) => setNewDescription(target.value)}
       />
-      <button
-        type="button"
-        onClick={verifyTaskAndEdit}
-      >
+      <label htmlFor="status">
+        <select
+          id="status"
+          role="combobox"
+          onChange={({ target }) => setTaskStatus(target.value)}
+        >
+          <option value="pending">Pending</option>
+          <option value="in progress">In progresss</option>
+          <option value="completed">Completed</option>
+        </select>
+      </label>
+      <button type="button" onClick={verifyTaskAndEdit}>
         Update Task
       </button>
     </div>
@@ -36,4 +47,5 @@ Modal.propTypes = {
   id: PropTypes.string.isRequired,
   fetch: PropTypes.func.isRequired,
   setModal: PropTypes.func.isRequired,
+  status: PropTypes.string.isRequired,
 };

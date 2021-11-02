@@ -1,13 +1,15 @@
 import axios from 'axios';
+import { decodeToken } from 'react-jwt';
 
-const editTask = async (description, fetchApiToUpdate, id, setModal) => {
-  const name = localStorage.getItem('name');
-  const email = localStorage.getItem('email');
+const editTask = async (description, fetchApiToUpdate, id, setModal, status) => {
   const token = localStorage.getItem('token');
+  const { data: { name } } = decodeToken(token);
 
   await axios.put(
     `http://localhost:5000/${id}`,
-    { description, name, email }, { headers: { Authorization: token } },
+    {
+      description, name, status,
+    }, { headers: { Authorization: token.replace(/"/g, '') } },
   );
 
   setTimeout(() => setModal(false), 1);

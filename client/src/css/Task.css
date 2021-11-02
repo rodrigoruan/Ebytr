@@ -13,6 +13,10 @@
   box-shadow: 0 0 5px #666666;
 }
 
+.task-status {
+  display: inline;
+}
+
 .buttons-task-container > button {
   background: none;
   border: none;
@@ -22,10 +26,17 @@
 
 .task-header > h3 {
   color: #1b1b1b;
+  display: inline;
   margin: 0 10px;
 }
 
-.task-header > p {
+.task-status {
   color: #666666;
-  margin-bottom: 5px;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.task-date {
+  color: #666666;
+  margin-top: 5px;
 }

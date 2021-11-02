@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { decodeToken } from 'react-jwt';
 
 const addTask = async (description, fetchApiToUpdate) => {
-  const name = localStorage.getItem('name');
-  const email = localStorage.getItem('email');
+  const token = localStorage.getItem('token');
+  const { data: { email, name } } = decodeToken(token);
 
   axios.post('http://localhost:5000', {
     description,

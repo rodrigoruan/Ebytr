@@ -1,0 +1,20 @@
+<svg width="128" height="128" xmlns="http://www.w3.org/2000/svg">
+
+ <title/>
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <circle fill="#f8dc25" id="svg_1" r="58" cy="64" cx="64" class="cls-1"/>
+  <path opacity="0.7" fill="#f2bc0f" id="svg_2" d="m53,107a71.65,71.65 0 0 1 -36.75,-10.09a58,58 0 0 0 105.31,-39.91a72,72 0 0 1 -68.56,50z" class="cls-2"/>
+  <path stroke-width="4px" stroke-miterlimit="10" stroke="#666666" stroke-linecap="round" fill="none" id="svg_3" d="m26.79,71.9c1.45,3.14 5,4.57 9.25,4.57s7.65,-1.38 9.16,-4.38" class="cls-3"/>
+  <path stroke-width="4px" stroke-miterlimit="10" stroke="#666666" stroke-linecap="round" fill="none" id="svg_4" d="m82.79,71.9c1.45,3.14 5,4.57 9.25,4.57s7.65,-1.38 9.16,-4.38" class="cls-3"/>
+  <line stroke-linejoin="round" opacity="0.5" stroke="#f2bc0f" stroke-width="4px" stroke-linecap="round" fill="none" id="svg_5" y2="59" y1="59" x2="99" x1="83" class="cls-4"/>
+  <line stroke-linejoin="round" opacity="0.5" stroke="#f2bc0f" stroke-width="4px" stroke-linecap="round" fill="none" id="svg_6" y2="59" y1="59" x2="45" x1="29" class="cls-4"/>
+  <circle fill="#666666" id="svg_7" r="7" cy="100" cx="81" class="cls-5"/>
+  <polyline stroke-width="6px" stroke="#666666" stroke-linejoin="round" stroke-linecap="round" fill="none" id="svg_8" points="80.32 14 95.18 14 80.32 35 95.18 35" class="cls-6"/>
+  <polyline stroke="#666666" stroke-linejoin="round" stroke-width="4px" stroke-linecap="round" fill="none" id="svg_9" points="104 31 111.57 31 103.79 42 112 42" class="cls-7"/>
+ </g>
+</svg>
