@@ -3,6 +3,9 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import Task from '../components/Task';
 import addTask from '../api/addTask';
+import addTaskIcon from '../imgs/addTask.svg';
+import todoIcon from '../imgs/todoIcon.svg';
+import '../css/Home.css';
 
 function Home() {
   const [data, setData] = React.useState(null);
@@ -23,6 +26,8 @@ function Home() {
     history.push('/');
   };
 
+  const verifyAndAddTask = () => taskDescription && addTask(taskDescription, fetchTasksFromApi);
+
   React.useEffect(() => {
     const token = localStorage.getItem('token');
     const storageName = localStorage.getItem('name');
@@ -39,23 +44,36 @@ function Home() {
 
   return (
     <div>
-      <header>
-        <p>{name}</p>
+      <header className="header-container">
+        <div>
+          <img src={todoIcon} alt="todo icon" />
+          <p className="user-logged">
+            Welcome
+            {' '}
+            <span className="username">{name}</span>
+            !
+          </p>
+        </div>
         <button type="button" onClick={() => logOutUser()}>
-          LogOut
+          Log Out
         </button>
       </header>
 
-      <input
-        placeholder="Add a task here..."
-        onChange={({ target }) => setTaskDescription(target.value)}
-      />
-      <button
-        type="button"
-        onClick={() => addTask(taskDescription, fetchTasksFromApi)}
-      >
-        Add
-      </button>
+      <hr />
+
+      <div className="task-input-container">
+        <input
+          placeholder="Add a task here..."
+          onChange={({ target }) => setTaskDescription(target.value)}
+        />
+        <button type="button" onClick={verifyAndAddTask}>
+          <img
+            className="add-task-image"
+            src={addTaskIcon}
+            alt="add task icon"
+          />
+        </button>
+      </div>
       <div>
         {data.map(({ description, name: task, _id: id }) => (
           <Task

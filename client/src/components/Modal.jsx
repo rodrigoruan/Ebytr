@@ -1,14 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import editTask from '../api/editTask';
+import '../css/Modal.css';
 
 function Modal({
   description, name, id, fetch, setModal,
 }) {
   const [newDescription, setNewDescription] = React.useState('');
 
+  const verifyTaskAndEdit = () => newDescription && editTask(newDescription, fetch, id, setModal);
+
   return (
-    <div>
+    <div className="modal-container">
       <h2>{description}</h2>
       <p>{name}</p>
       <input
@@ -17,7 +20,7 @@ function Modal({
       />
       <button
         type="button"
-        onClick={() => editTask(newDescription, fetch, id, setModal)}
+        onClick={verifyTaskAndEdit}
       >
         Update Task
       </button>

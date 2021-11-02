@@ -2,11 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import editTask from '../api/editTask';
 import deleteTask from '../api/deleteTask';
-
 import Modal from './Modal';
-
 import Trash from '../imgs/trash.svg';
 import Edit from '../imgs/edit.svg';
+import '../css/Task.css';
 
 function Task({
   description, name, id, fetch,
@@ -27,12 +26,12 @@ function Task({
   }
 
   return (
-    <div>
-      <div>
+    <div className="task-container">
+      <div className="task-header">
         <h3>{description}</h3>
         <p>{name}</p>
       </div>
-      <div>
+      <div className="buttons-task-container">
         <button onClick={() => setModal(true)} type="button">
           <img width="25px" src={Edit} alt="Edit icon" />
         </button>
