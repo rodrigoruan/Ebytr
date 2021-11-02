@@ -2,14 +2,19 @@ import React from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { decodeToken } from 'react-jwt';
-import Task from '../components/Task';
+
+import { sortByDate, sortByLetter, sortByStatus } from '../api/sortTasks';
 import addTask from '../api/addTask';
+
+import Header from '../components/Header';
+import TasksNotFound from '../components/TasksNotFound';
+import Task from '../components/Task';
+
 import addTaskIcon from '../imgs/addTask.svg';
-import todoIcon from '../imgs/todoIcon.svg';
-import sleepIcon from '../imgs/sleep.svg';
 import alpSort from '../imgs/alpSort.svg';
 import calendarSort from '../imgs/calendarSort.svg';
 import statusSort from '../imgs/statusSort.svg';
+
 import '../css/Home.css';
 
 function Home() {
@@ -20,26 +25,22 @@ function Home() {
   const [refresh, setRefresh] = React.useState(false);
   const history = useHistory();
 
-  const sortByLetter = () => {
-    setData(data.sort((a, b) => a.description.localeCompare(b.description)));
-    setRefresh(!refresh);
-  };
+  const fetchTasks = () => axios
+    .get('http://localhost:5000/')
+    .then((response) => setData(response.data));
 
-  const sortByDate = () => {
-    setData(data.sort((a, b) => new Date(a.momentDate) - new Date(b.momentDate).getTime()));
-    setRefresh(!refresh);
-  };
+  React.useEffect(() => {
+    fetchTasks();
+  }, []);
 
-  const sortByStatus = () => {
-    setData(data.sort((a, b) => a.status.localeCompare(b.status)));
-    setRefresh(!refresh);
-  };
-
-  const fetchTasksFromApi = () => {
-    axios
-      .get('http://localhost:5000/')
-      .then((response) => setData(response.data));
-  };
+  React.useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      setLogged(true);
+      const decoded = decodeToken(token);
+      setName(decoded.data.name);
+    }
+  }, []);
 
   const logOutUser = () => {
     localStorage.clear();
@@ -49,41 +50,17 @@ function Home() {
 
   const verifyAndAddTask = () => {
     if (taskDescription) {
-      addTask(taskDescription, fetchTasksFromApi);
+      addTask(taskDescription, fetchTasks);
       setTaskDescription('');
     }
   };
-
-  React.useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) setLogged(true);
-    const decoded = decodeToken(token);
-    setName(decoded.data.name);
-  }, []);
-
-  React.useEffect(() => {
-    fetchTasksFromApi();
-  }, []);
 
   if (!data) return <div>Loading...</div>;
   if (!logged) return <div>User not logged</div>;
 
   return (
     <div>
-      <header className="header-container">
-        <div>
-          <img src={todoIcon} alt="todo icon" />
-          <p className="user-logged">
-            Welcome
-            {' '}
-            <span className="username">{name}</span>
-            !
-          </p>
-        </div>
-        <button type="button" onClick={() => logOutUser()}>
-          Log Out
-        </button>
-      </header>
+      <Header name={name} logOutUser={logOutUser} />
 
       <hr />
 
@@ -101,41 +78,47 @@ function Home() {
           />
         </button>
       </div>
+
       <div className="task-buttons-order">
-        <button type="button" onClick={sortByLetter}>
+        <button
+          type="button"
+          onClick={() => sortByLetter(setData, data, setRefresh, refresh)}
+        >
           <img src={alpSort} alt="alphabet icon" />
         </button>
-        <button type="button" onClick={sortByDate}>
-          <img src={calendarSort} alt="alphabet icon" />
+        <button
+          type="button"
+          onClick={() => sortByDate(setData, data, setRefresh, refresh)}
+        >
+          <img src={calendarSort} alt="calendar icon" />
         </button>
-        <button type="button" onClick={sortByStatus}>
-          <img src={statusSort} alt="alphabet icon" />
+        <button
+          type="button"
+          onClick={() => sortByStatus(setData, data, setRefresh, refresh)}
+        >
+          <img src={statusSort} alt="status icon" />
         </button>
       </div>
+
       <div>
-        {data.length ? (
-          data.map(
-            ({
-              description, name: task, _id: id, status, momentDate,
-            }) => (
-              <Task
-                key={id}
-                description={description}
-                name={task}
-                id={id}
-                fetch={fetchTasksFromApi}
-                status={status}
-                date={momentDate}
-              />
-            ),
-          )
+        {data.length === 0 ? (
+          <TasksNotFound />
         ) : (
-          <div className="no-tasks-container">
-            <h1 className="no-tasks">
-              Seems doesn&lsquo;t have any tasks yet...
-            </h1>
-            <img src={sleepIcon} alt="sleep icon" />
-          </div>
+          data.map(({
+            description, name: task, _id: id, status, momentDate,
+          }) => (
+            <Task
+              key={id}
+              {...{
+                description,
+                task,
+                id,
+                fetchTasks,
+                status,
+                momentDate,
+              }}
+            />
+          ))
         )}
       </div>
     </div>

@@ -1,7 +1,10 @@
 import React from 'react';
 import { Redirect, Link } from 'react-router-dom';
+
 import loginUser from '../api/loginUser';
+
 import TodoIcon from '../imgs/todoIcon.svg';
+
 import '../css/Login.css';
 
 function Login() {

@@ -31,18 +31,4 @@ routes.post('/login', async (req, res) => {
   res.status(200).json(token);
 });
 
-routes.post('/create/admin', async (req, res) => {
-  const {
-    email, password, name, code,
-  } = req.body;
-
-  const response = await services.createAdmin(email, password, name, code);
-
-  if (response.error) {
-    return res.status(400).json(response);
-  }
-
-  res.status(200).json(response);
-});
-
 module.exports = routes;
