@@ -12,7 +12,9 @@ function Modal({
   const [taskStatus, setTaskStatus] = React.useState('pending');
 
   const verifyTaskAndEdit = () => {
-    if (newDescription) editTask(newDescription, fetchTasks, id, setModal, taskStatus);
+    if (newDescription) {
+      editTask(newDescription, fetchTasks, id, setModal, taskStatus);
+    }
   };
 
   return (

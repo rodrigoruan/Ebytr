@@ -7,9 +7,8 @@ const editTask = async (description, fetchApiToUpdate, id, setModal, status) => 
 
   await axios.put(
     `http://localhost:5000/${id}`,
-    {
-      description, name, status,
-    }, { headers: { Authorization: token.replace(/"/g, '') } },
+    { description, name, status },
+    { headers: { Authorization: token.replace(/"/g, '') } },
   );
 
   setTimeout(() => setModal(false), 1);

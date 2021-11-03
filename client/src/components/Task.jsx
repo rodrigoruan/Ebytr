@@ -21,15 +21,13 @@ function Task({
 
   const verifyIfUserIsAdminOrOwnsTask = () => {
     const token = localStorage.getItem('token');
-    const {
-      data: { admin, name: localStorageName },
-    } = decodeToken(token);
+    const { data: { admin, name: localStorageName } } = decodeToken(token);
 
     if (localStorageName === task || admin) {
       setModal(true);
     } else {
       setError('You cannot change / delete this task');
-      setTimeout(() => setError(''), 4000);
+      setTimeout(() => setError(''), 5000);
     }
   };
 
@@ -37,12 +35,7 @@ function Task({
     return (
       <Modal
         {...{
-          description,
-          task,
-          id,
-          fetchTasks,
-          setModal,
-          status,
+          description, task, id, fetchTasks, setModal, status,
         }}
       />
     );
@@ -55,7 +48,9 @@ function Task({
         <p className="task-date">{formatedDate}</p>
         <p className="task-status">{`${task} / ${status}`}</p>
       </div>
+
       <p className="task-error">{error}</p>
+
       <div className="buttons-task-container">
         <button onClick={verifyIfUserIsAdminOrOwnsTask} type="button">
           <img width="25px" src={Edit} alt="Edit icon" />

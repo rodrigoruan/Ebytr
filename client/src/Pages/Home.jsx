@@ -101,25 +101,17 @@ function Home() {
       </div>
 
       <div>
-        {data.length === 0 ? (
-          <TasksNotFound />
-        ) : (
-          data.map(({
+        {data.length === 0 ? (<TasksNotFound />)
+          : (data.map(({
             description, name: task, _id: id, status, momentDate,
           }) => (
             <Task
               key={id}
               {...{
-                description,
-                task,
-                id,
-                fetchTasks,
-                status,
-                momentDate,
+                description, task, id, fetchTasks, status, momentDate,
               }}
             />
-          ))
-        )}
+          )))}
       </div>
     </div>
   );
