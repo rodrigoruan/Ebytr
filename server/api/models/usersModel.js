@@ -10,10 +10,20 @@ const createUser = async (email, name, password) => connection()
 
 const loginUser = async (email, password) => connection().then((db) => db.collection('users').findOne({ email, password }));
 
+const insertAdminUser = ({ name, email, password }) => connection()
+  .then((db) => db.collection('users').insertOne({
+    name,
+    email,
+    password,
+    admin: true,
+  }))
+  .then((r) => ({ id: r.insertedId, name, email }));
+
 const getAllAdmins = async () => connection().then((db) => db.collection('users').find({ admin: true }).toArray());
 
 module.exports = {
   createUser,
   loginUser,
   getAllAdmins,
+  insertAdminUser,
 };

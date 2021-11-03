@@ -9,6 +9,7 @@ const services = require('../services/usersService');
 
 routes.post('/create', async (req, res) => {
   const { email, name, password } = req.body;
+
   const response = await services.createUser(email, name, password);
   const CODE = response.error ? 400 : 200;
   res.status(CODE).json(response);

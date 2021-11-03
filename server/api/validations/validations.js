@@ -1,4 +1,4 @@
-const validateData = (...informations) => informations.includes(undefined);
+const validateData = (...informations) => informations.some((information) => !information);
 
 const validateEmailFormat = (email) => !/^\w+@\w+\.com(\.br)?$/.test(email);
 
