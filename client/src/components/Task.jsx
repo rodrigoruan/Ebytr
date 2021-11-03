@@ -21,7 +21,9 @@ function Task({
 
   const verifyIfUserIsAdminOrOwnsTask = () => {
     const token = localStorage.getItem('token');
-    const { data: { admin, name: localStorageName } } = decodeToken(token);
+    const {
+      data: { admin, name: localStorageName },
+    } = decodeToken(token);
 
     if (localStorageName === task || admin) {
       setModal(true);
@@ -33,9 +35,15 @@ function Task({
 
   if (modal) {
     return (
-      <Modal {...{
-        description, task, id, fetchTasks, setModal, status,
-      }}
+      <Modal
+        {...{
+          description,
+          task,
+          id,
+          fetchTasks,
+          setModal,
+          status,
+        }}
       />
     );
   }
