@@ -10,9 +10,8 @@ chai.use(chaiHttp);
 const { expect } = chai;
 
 describe('POST user', () => {
-  const DBServer = new MongoMemoryServer();
-
   before(async () => {
+    const DBServer = new MongoMemoryServer();
     const URLMock = await DBServer.getUri();
     const OPTIONS = {
       useNewUrlParser: true,
