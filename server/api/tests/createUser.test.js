@@ -1,35 +1,61 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+const sinon = require('sinon');
+const { MongoClient } = require('mongodb');
+const { MongoMemoryServer } = require('mongodb-memory-server');
 const app = require('../index');
 
-const { expect } = chai;
 chai.use(chaiHttp);
 
-describe('POST create user', () => {
-  it('when create new user successfully', (done) => {
-    chai
-      .request(app)
+const { expect } = chai;
+
+describe('POST user', () => {
+  const DBServer = new MongoMemoryServer();
+
+  before(async () => {
+    const URLMock = await DBServer.getUri();
+    const OPTIONS = {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    };
+
+    const connectionMock = await MongoClient.connect(URLMock, OPTIONS);
+
+    sinon.stub(MongoClient, 'connect').resolves(connectionMock);
+  });
+
+  after(() => {
+    MongoClient.connect.restore();
+  });
+
+  it('when create new user successfully', () => {
+    chai.request(app)
       .post('/users/create')
-      .send({ email: 'joaozinho@gmail.com', name: 'joaozinho', password: 'frangofrito' })
-      .end((_err, res) => {
-        const response = JSON.parse(res.text);
-        expect(res.status).to.equal(200);
-        expect(response.email).to.equal('joaozinho@gmail.com');
-        expect(response.name).to.equal('joaozinho');
-        done();
+      .send({
+        name: 'rodrigo',
+        email: 'rodrigo@gmail.com',
+        password: 'abc123',
+      }).end((_err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.have.property('id');
+        expect(res.body).to.have.property('name');
+        expect(res.body).to.have.property('email');
+        expect(res.body.name).to.be.equal('rodrigo');
+        expect(res.body.email).to.be.equal('rodrigo@gmail.com');
       });
   });
 
-  it('when not create a user successfully', (done) => {
-    chai
-      .request(app)
+  it('when not create user successfully', () => {
+    chai.request(app)
       .post('/users/create')
-      .send({ email: '', name: 'joaozinho', password: 'frangofrito' })
-      .end((_err, res) => {
-        const response = JSON.parse(res.text);
-        expect(res.status).to.equal(400);
-        expect(response.error).to.equal('invalid data');
-        done();
+      .send({
+        name: '',
+        email: '',
+        password: 'abc123',
+      }).end((_err, res) => {
+        expect(res).to.have.status(400);
+        expect(res.body).to.have.property('error');
+        expect(res.body.error).to.be.equal('invalid data');
       });
   });
 });
