@@ -4,7 +4,8 @@
   "description": "",
   "main": "api/index.js",
   "scripts": {
-    "test": "nyc mocha **/tests/*.test.js",
+    "test": "mocha **tests/*.test.js --exit",
+    "dev": "nyc mocha **/tests/*.test.js --exit",
     "lint": "eslint",
     "start": "nodemon index.js"
   },
