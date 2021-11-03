@@ -1,0 +1,49 @@
+.login-title {
+  color: #1b1b1b;
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.login-container {
+  text-align: center;
+}
+
+.login-container > img {
+  margin-top: 40px;
+  width: 50px;
+}
+
+.login-container > input {
+  margin: 0 auto;
+  display: block;
+  width: 300px;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  border: 1px solid #b6b6b6;
+  outline: none;
+  color: #1b1b1b;
+}
+
+.login-container > button {
+  cursor: pointer;
+  width: 300px;
+  padding: 11px 20px;
+  background: none;
+  border: 1.5px solid #1b1b1b;
+  margin-top: 10px;
+  transition: 0.5s;
+}
+
+.login-container > p {
+  margin-top: 10px;
+}
+
+.register-button {
+  color: black;
+  text-decoration: underline #ffcc00;
+}
+
+.login-error {
+  color: #ee1212;
+}

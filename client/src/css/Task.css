@@ -1,0 +1,47 @@
+.task-container {
+  text-align: center;
+  width: 400px;
+  margin: 5px auto 7px auto;
+  padding: 10px 0;
+  word-wrap: break-word;
+  transition: 0.5s;
+  max-width: 100%;
+}
+
+.task-container:hover {
+  transform: 0.5s;
+  box-shadow: 0 0 5px #666666;
+}
+
+.task-status {
+  display: inline;
+}
+
+.buttons-task-container > button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.task-header > h3 {
+  color: #1b1b1b;
+  display: inline;
+  margin: 0 10px;
+}
+
+.task-status {
+  color: #666666;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.task-date {
+  color: #666666;
+  margin-top: 5px;
+}
+
+.task-error {
+  color: #ee1212;
+  margin-bottom: 8px;
+}

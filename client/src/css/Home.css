@@ -1,0 +1,94 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 50px 10px 50px;
+  color: #1b1b1b;
+  align-items: center;
+}
+
+.header-container > div {
+  display: flex;
+  align-items: center;
+}
+
+.user-logged {
+  margin-left: 15px;
+}
+
+.header-container > img {
+  width: 25px;
+}
+
+.header-container > button {
+  border: none;
+  background-color: #000000;
+  color: #ffffff;
+  padding: 4px 20px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.5s;
+}
+
+.header-container > button:hover {
+  transition: 0.5s;
+  background: #ffcc00;
+  color: #000000;
+}
+
+.task-input-container {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+  max-width: 100%;
+}
+
+.task-input-container > input {
+  border: 1px solid rgba(0, 0, 0, 0.493);
+  padding: 8px 80px;
+  margin: 8px 0 0 8px;
+  outline: none;
+  margin-left: 45px;
+}
+
+.task-input-container > button {
+  background: none;
+  padding: 0 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.add-task-image {
+  width: 30px;
+  margin-top: 10px;
+}
+
+.username {
+  color: #ffcc00;
+  text-transform: capitalize;
+}
+
+.no-tasks-container {
+  text-align: center;
+}
+
+.no-tasks-container > h1 {
+  text-align: center;
+  color: #666;
+  margin-top: 20px;
+}
+
+.no-tasks-container > img {
+  margin-top: 30px;
+}
+
+.task-buttons-order {
+  display: flex;
+  justify-content: center;
+}
+
+.task-buttons-order > button {
+  background: none;
+  border: none;
+  margin: 0 20px;
+  cursor: pointer;
+}

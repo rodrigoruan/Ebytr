@@ -1,4 +1,3 @@
-// const { ObjectID } = require('mongodb');
 const connection = require('./connection');
 
 const createUser = async (email, name, password) => connection()
@@ -11,20 +10,20 @@ const createUser = async (email, name, password) => connection()
 
 const loginUser = async (email, password) => connection().then((db) => db.collection('users').findOne({ email, password }));
 
-const createAdmin = async (email, password, name) => connection()
+const insertAdminUser = ({ name, email, password }) => connection()
   .then((db) => db.collection('users').insertOne({
+    name,
     email,
     password,
-    name,
     admin: true,
   }))
-  .then((response) => ({ id: response.insertedId, email, password }));
+  .then((r) => ({ id: r.insertedId, name, email }));
 
-const loginAdmin = async (email, password) => connection().then((db) => db.collection('users').findOne({ email, password }));
+const getAllAdmins = async () => connection().then((db) => db.collection('users').find({ admin: true }).toArray());
 
 module.exports = {
   createUser,
   loginUser,
-  createAdmin,
-  loginAdmin,
+  getAllAdmins,
+  insertAdminUser,
 };
