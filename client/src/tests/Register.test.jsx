@@ -11,12 +11,12 @@ it('renders correctly Register page screen', () => {
   expect(loginTitle).toBeInTheDocument();
 
   const nameInput = screen.getByPlaceholderText(/Name/i);
-  userEvent.type(nameInput, 'rodrigo');
-  expect(nameInput.value).toContain('rodrigo');
+  userEvent.type(nameInput, 'marcos');
+  expect(nameInput.value).toContain('marcos');
 
   const emailInput = screen.getByPlaceholderText(/Email/i);
-  userEvent.type(emailInput, 'rodrigo@gmail.com');
-  expect(emailInput.value).toContain('rodrigo@gmail.com');
+  userEvent.type(emailInput, 'marcos@gmail.com');
+  expect(emailInput.value).toContain('marcos@gmail.com');
 
   const passwordInput = screen.getByPlaceholderText(/Password/i);
   userEvent.type(passwordInput, 'batataassada');
@@ -24,4 +24,5 @@ it('renders correctly Register page screen', () => {
 
   const createAccountButton = screen.getByText(/Create account/i);
   expect(createAccountButton).toBeInTheDocument();
+  userEvent.click(createAccountButton);
 });
