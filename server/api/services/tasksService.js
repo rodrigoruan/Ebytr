@@ -11,6 +11,9 @@ const getAllTasks = async () => models.getAllTasks();
 
 const addTask = async (description, name, email) => {
   const momentDate = new Date();
+
+  if (validateData(description, name, email)) return errorMessage;
+
   const response = await models.addTask(description, name, email, momentDate);
   return response;
 };

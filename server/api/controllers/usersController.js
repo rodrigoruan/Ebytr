@@ -19,8 +19,6 @@ routes.post('/login', async (req, res) => {
 
   const response = await services.loginUser(email, password);
 
-  console.log(response);
-
   if (response.error) {
     return res.status(401).json(response);
   }

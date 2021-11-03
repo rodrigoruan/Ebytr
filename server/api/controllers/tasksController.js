@@ -11,6 +11,7 @@ routes.get('/', async (_req, res) => {
 routes.post('/', async (req, res) => {
   const { description, name, email } = req.body;
   const response = await services.addTask(description, name, email);
+  if (response.error) return res.status(400).json(response);
   res.status(200).json(response);
 });
 

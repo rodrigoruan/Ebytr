@@ -13,6 +13,8 @@ app.use(express.json());
 app.use('/', tasksRoutes);
 app.use('/users', usersRoutes);
 
-app.listen(port);
+if (!module.parent) {
+  app.listen(port);
+}
 
 module.exports = app;

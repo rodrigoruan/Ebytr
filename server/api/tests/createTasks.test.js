@@ -1,49 +1,47 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const sinon = require('sinon');
-const { MongoClient } = require('mongodb');
-const { MongoMemoryServer } = require('mongodb-memory-server');
-
-const server = require('../index');
-
-chai.use(chaiHttp);
+const app = require('../index');
 
 const { expect } = chai;
+chai.use(chaiHttp);
 
-describe('POST /', () => {
-  describe('quando é criado com sucesso', () => {
-    let response = {};
-    const DBServer = new MongoMemoryServer();
-
-    before(async () => {
-      const URLMock = await DBServer.getUri();
-      const connectionMock = await MongoClient.connect(URLMock, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
+describe('POST tasks', () => {
+  it('when create new task successfully', (done) => {
+    chai
+      .request(app)
+      .post('/')
+      .send({
+        description: 'Passear com o cachorro',
+        name: 'João',
+        email: 'joao@gmail.com',
+      })
+      .end((_err, res) => {
+        expect(res).to.have.status(200);
+        const response = JSON.parse(res.text);
+        expect(response).to.have.a.property('_id');
+        expect(response).to.have.a.property('description');
+        expect(response).to.have.a.property('name');
+        expect(response).to.have.a.property('momentDate');
+        expect(response.description).to.equal('Passear com o cachorro');
+        expect(response.name).to.equal('João');
+        done();
       });
+  });
 
-      sinon.stub(MongoClient, 'connect').resolves(connectionMock);
-
-      response = await chai
-        .request(server)
-        .get('/');
-    });
-
-    it('retorna o código de status 204', () => {
-      expect(response).to.have.status(204);
-    });
-
-    it('retorna um objeto', () => {
-      expect(response.body).to.be.a('object');
-    });
-
-    it('o objeto possui a propriedade "_id"', () => {
-      expect(response.body).to.have.a.property('_id');
-    });
-
-    after(async () => {
-      MongoClient.connect.restore();
-      await DBServer.stop();
-    });
+  it('when not create task successfully', (done) => {
+    chai
+      .request(app)
+      .post('/')
+      .send({
+        name: 'João',
+        email: 'joao@gmail.com',
+      })
+      .end((_err, res) => {
+        expect(res).to.have.status(400);
+        const response = JSON.parse(res.text);
+        expect(response.error).to.be.a('string');
+        expect(response.error).to.equal('invalid data');
+        done();
+      });
   });
 });
