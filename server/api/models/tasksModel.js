@@ -5,7 +5,11 @@ const getAllTasks = async () => connection().then((db) => db.collection('tasks')
 
 const addTask = async (description, name, email, momentDate) => connection()
   .then((db) => db.collection('tasks').insertOne({
-    description, name, email, momentDate, status: 'pending',
+    description,
+    name,
+    email,
+    momentDate,
+    status: 'pending',
   }))
   .then((response) => ({
     _id: response.insertedId,

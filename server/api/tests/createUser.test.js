@@ -13,6 +13,7 @@ describe('POST user', () => {
   before(async () => {
     const DBServer = new MongoMemoryServer();
     const URLMock = await DBServer.getUri();
+
     const OPTIONS = {
       useNewUrlParser: true,
       useUnifiedTopology: true,

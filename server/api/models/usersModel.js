@@ -2,11 +2,7 @@ const connection = require('./connection');
 
 const createUser = async (email, name, password) => connection()
   .then((db) => db.collection('users').insertOne({ email, name, password }))
-  .then((response) => ({
-    id: response.insertedId,
-    email,
-    name,
-  }));
+  .then((response) => ({ id: response.insertedId, email, name }));
 
 const loginUser = async (email, password) => connection().then((db) => db.collection('users').findOne({ email, password }));
 
@@ -17,7 +13,7 @@ const insertAdminUser = ({ name, email, password }) => connection()
     password,
     admin: true,
   }))
-  .then((r) => ({ id: r.insertedId, name, email }));
+  .then((response) => ({ id: response.insertedId, name, email }));
 
 const getAllAdmins = async () => connection().then((db) => db.collection('users').find({ admin: true }).toArray());
 

@@ -3,8 +3,6 @@ const chaiHttp = require('chai-http');
 const sinon = require('sinon');
 const { MongoClient } = require('mongodb');
 const { MongoMemoryServer } = require('mongodb-memory-server');
-const jwt = require('jsonwebtoken');
-const models = require('../models/usersModel');
 const app = require('../index');
 
 chai.use(chaiHttp);
@@ -16,6 +14,7 @@ describe('GET tasks', () => {
 
   before(async () => {
     const URLMock = await DBServer.getUri();
+
     const OPTIONS = {
       useNewUrlParser: true,
       useUnifiedTopology: true,
