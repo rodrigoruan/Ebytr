@@ -40,3 +40,8 @@
   color: #666666;
   margin-top: 5px;
 }
+
+.task-error {
+  color: #ee1212;
+  margin-bottom: 8px;
+}

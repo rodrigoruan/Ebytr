@@ -11,6 +11,7 @@ function Login() {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [redirect, setRedirect] = React.useState(false);
+  const [error, setError] = React.useState('');
 
   React.useEffect(() => {
     const token = localStorage.getItem('token');
@@ -34,8 +35,10 @@ function Login() {
         type="password"
       />
 
+      <p className="login-error">{error}</p>
+
       <button
-        onClick={() => loginUser(email, password, setRedirect)}
+        onClick={() => loginUser(email, password, setRedirect, setError)}
         type="button"
       >
         Log In

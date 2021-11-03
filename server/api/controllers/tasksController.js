@@ -23,10 +23,7 @@ routes.delete('/:id', async (req, res) => {
 
 routes.put('/:id', async (req, res) => {
   const { id } = req.params;
-  const {
-    description, status,
-  } = req.body;
-
+  const { description, status } = req.body;
   const token = req.headers.authorization;
   const response = await services.editTask(id, description, token, status);
   res.status(200).json(response);

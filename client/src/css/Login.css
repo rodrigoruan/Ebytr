@@ -43,3 +43,7 @@
   color: black;
   text-decoration: underline #ffcc00;
 }
+
+.login-error {
+  color: #ee1212;
+}

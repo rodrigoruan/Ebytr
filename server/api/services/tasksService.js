@@ -21,6 +21,7 @@ const deleteTask = async (id, token) => {
 
   const allTasks = await getAllTasks();
   const allAdmins = await getAllAdmins();
+
   const userIsAdmin = allAdmins.some((admin) => admin.email === email);
   const userOwnsTask = allTasks.find(
     ({ email: taskEmail, _id: taskId }) => taskId.toString() === id && email === taskEmail,
@@ -40,6 +41,7 @@ const editTask = async (id, description, token, status) => {
 
   const allTasks = await getAllTasks();
   const allAdmins = await getAllAdmins();
+
   const userIsAdmin = allAdmins.some((admin) => admin.email === email);
   const userOwnsTask = allTasks.find(
     ({ email: taskEmail, _id: taskId }) => taskId.toString() === id && email === taskEmail,

@@ -15,6 +15,7 @@ function Task({
   description, task, id, fetchTasks, status, momentDate,
 }) {
   const [modal, setModal] = React.useState(false);
+  const [error, setError] = React.useState('');
 
   const formatedDate = new Date(momentDate).toLocaleString();
 
@@ -22,7 +23,12 @@ function Task({
     const token = localStorage.getItem('token');
     const { data: { admin, name: localStorageName } } = decodeToken(token);
 
-    if (localStorageName === task || admin) setModal(true);
+    if (localStorageName === task || admin) {
+      setModal(true);
+    } else {
+      setError('You cannot change / delete this task');
+      setTimeout(() => setError(''), 4000);
+    }
   };
 
   if (modal) {
@@ -41,7 +47,7 @@ function Task({
         <p className="task-date">{formatedDate}</p>
         <p className="task-status">{`${task} / ${status}`}</p>
       </div>
-
+      <p className="task-error">{error}</p>
       <div className="buttons-task-container">
         <button onClick={verifyIfUserIsAdminOrOwnsTask} type="button">
           <img width="25px" src={Edit} alt="Edit icon" />

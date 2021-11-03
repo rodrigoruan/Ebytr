@@ -1,14 +1,17 @@
 import axios from 'axios';
 
-const loginUser = async (email, password, callback) => {
-  const token = await axios.post('http://localhost:5000/users/login', {
-    email,
-    password,
-  });
+const loginUser = async (email, password, callback, setError) => {
+  try {
+    const token = await axios.post('http://localhost:5000/users/login', {
+      email,
+      password,
+    });
 
-  if (token) callback(true);
-
-  localStorage.setItem('token', JSON.stringify(token.data));
+    callback(true);
+    localStorage.setItem('token', JSON.stringify(token.data));
+  } catch (err) {
+    setError('Invalid data!');
+  }
 };
 
 export default loginUser;

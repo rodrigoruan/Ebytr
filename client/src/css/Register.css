@@ -1,0 +1,42 @@
+.register-container {
+  text-align: center;
+}
+
+.register-container > h1 {
+  margin-top: 40px;
+  color: #1b1b1b;
+}
+
+.register-form > input {
+  display: block;
+  margin: 0 auto;
+  margin-top: 10px;
+  width: 400px;
+  padding: 10px 20px;
+  outline: none;
+  border: 1px solid rgba(102, 102, 102, 0.596);
+}
+
+.register-form > input:nth-child(1) {
+  margin-top: 20px;
+}
+
+.register-form > button {
+  width: 400px;
+  margin-top: 15px;
+  padding: 15px 0;
+  color: #000000;
+  border: none;
+  background-color: #ffcc00;
+  cursor: pointer;
+}
+
+.return-icon {
+  width: 40px;
+  margin: 10px 0 0 15px;
+}
+
+.register-error {
+  color: rgb(255, 0, 0);
+  margin-top: 10px;
+}
