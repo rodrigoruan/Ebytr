@@ -3,7 +3,7 @@ import axios from 'axios';
 const deleteTask = async (id, fetchApiToUpdate) => {
   const token = localStorage.getItem('token');
 
-  await axios.delete(`http://localhost:5000/${id}`, {
+  await axios.delete(`http://ebytr-rodrigo.herokuapp.com/${id}`, {
     headers: { Authorization: token.replace(/"/g, '') },
   });
 

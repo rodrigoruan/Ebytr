@@ -15,7 +15,7 @@ const createUser = async (email, password, name, setCreated, setError) => {
     setError('Password must be at least 6 characters');
   }
 
-  const response = await axios.post('http://localhost:5000/users/create', { email, password, name })
+  const response = await axios.post('http://ebytr-rodrigo.herokuapp.com/users/create', { email, password, name })
     .catch(() => setError('User already exist!'));
 
   if (response) setCreated(true);
