@@ -26,7 +26,7 @@ function Home() {
   const history = useHistory();
 
   const fetchTasks = () => axios
-    .get('http://localhost:5000/')
+    .get('https://ebytr-rodrigo.herokuapp.com')
     .then((response) => setData(response.data));
 
   React.useEffect(() => {
