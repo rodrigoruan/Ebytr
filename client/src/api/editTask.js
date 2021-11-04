@@ -6,7 +6,7 @@ const editTask = async (description, fetchApiToUpdate, id, setModal, status) => 
   const { data: { name } } = decodeToken(token);
 
   await axios.put(
-    `http://ebytr-rodrigo.herokuapp.com/${id}`,
+    `https://ebytr-rodrigo.herokuapp.com/${id}`,
     { description, name, status },
     { headers: { Authorization: token.replace(/"/g, '') } },
   );
