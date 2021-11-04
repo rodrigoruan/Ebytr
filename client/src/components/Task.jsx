@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { decodeToken } from 'react-jwt';
 
 import deleteTask from '../api/deleteTask';
+import verifyUser from '../api/verifyUser';
 
 import Modal from './Modal';
 
@@ -18,18 +18,6 @@ function Task({
   const [error, setError] = React.useState('');
 
   const formatedDate = new Date(momentDate).toLocaleString();
-
-  const verifyIfUserIsAdminOrOwnsTask = () => {
-    const token = localStorage.getItem('token');
-    const { data: { admin, name: localStorageName } } = decodeToken(token);
-
-    if (localStorageName === task || admin) {
-      setModal(true);
-    } else {
-      setError('You cannot change / delete this task');
-      setTimeout(() => setError(''), 5000);
-    }
-  };
 
   if (modal) {
     return (
@@ -52,7 +40,7 @@ function Task({
       <p className="task-error">{error}</p>
 
       <div className="buttons-task-container">
-        <button onClick={verifyIfUserIsAdminOrOwnsTask} type="button">
+        <button onClick={() => verifyUser(task, setModal, setError)} type="button">
           <img width="25px" src={Edit} alt="Edit icon" />
         </button>
         <button onClick={() => deleteTask(id, fetchTasks)} type="button">

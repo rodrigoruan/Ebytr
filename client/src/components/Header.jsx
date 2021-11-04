@@ -10,12 +10,6 @@ function Header() {
   const [logged, setLogged] = React.useState(false);
   const history = useHistory();
 
-  const logOutUser = () => {
-    localStorage.clear();
-    setLogged(false);
-    history.push('/');
-  };
-
   React.useEffect(() => {
     const token = localStorage.getItem('token');
     const decoded = decodeToken(token);
@@ -24,6 +18,12 @@ function Header() {
       setName(decoded.data.name);
     }
   }, []);
+
+  const logOutUser = () => {
+    localStorage.clear();
+    setLogged(false);
+    history.push('/');
+  };
 
   if (!logged) return <div>User not logged</div>;
 

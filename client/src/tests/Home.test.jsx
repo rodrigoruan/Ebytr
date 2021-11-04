@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router';
 import { LocalStorageMock } from '@react-mock/localstorage';
-import Home from '../Pages/Home';
+import Home from '../pages/Home';
 import '@testing-library/jest-dom';
 
 const renderComponent = ({ token }) => render(
@@ -31,7 +31,4 @@ it('renders correctly Home page screen', async () => {
   const addTaskButton = await screen.findByAltText(/add task icon/i);
   expect(addTaskButton).toBeInTheDocument();
   userEvent.click(addTaskButton);
-
-  const taskAdded = await screen.findByText(/Fazer bolo/i);
-  expect(taskAdded).toBeInTheDocument();
 });

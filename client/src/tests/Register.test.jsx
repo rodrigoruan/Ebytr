@@ -2,7 +2,7 @@ import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
-import Register from '../Pages/Register';
+import Register from '../pages/Register';
 import '@testing-library/jest-dom/extend-expect';
 
 it('renders correctly Register page screen', () => {
