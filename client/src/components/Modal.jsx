@@ -9,11 +9,14 @@ function Modal({
   description, task, id, fetchTasks, setModal, status,
 }) {
   const [newDescription, setNewDescription] = React.useState('');
+  const [error, setError] = React.useState('');
   const [taskStatus, setTaskStatus] = React.useState('pending');
 
   const verifyTaskAndEdit = () => {
     if (newDescription) {
       editTask(newDescription, fetchTasks, id, setModal, taskStatus);
+    } else {
+      setError('Please, enter a valid task');
     }
   };
 
@@ -22,6 +25,8 @@ function Modal({
       <h2>{description}</h2>
 
       <p>{`${task} / ${status}`}</p>
+
+      <p className="modal-error">{error}</p>
 
       <input
         placeholder="New description"

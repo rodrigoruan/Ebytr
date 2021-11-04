@@ -14,6 +14,7 @@ function App() {
         <Route exact path="/" component={Login} />
         <Route path="/home" component={Home} />
         <Route path="/register" component={Register} />
+        <Route component={Login} />
       </Switch>
     </BrowserRouter>
   );
