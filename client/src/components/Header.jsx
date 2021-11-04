@@ -1,9 +1,32 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
+
+import { decodeToken } from 'react-jwt';
 
 import todoIcon from '../imgs/todoIcon.svg';
 
-function Header({ name, logOutUser }) {
+function Header() {
+  const [name, setName] = React.useState('');
+  const [logged, setLogged] = React.useState(false);
+  const history = useHistory();
+
+  const logOutUser = () => {
+    localStorage.clear();
+    setLogged(false);
+    history.push('/');
+  };
+
+  React.useEffect(() => {
+    const token = localStorage.getItem('token');
+    const decoded = decodeToken(token);
+    if (token && decoded) {
+      setLogged(true);
+      setName(decoded.data.name);
+    }
+  }, []);
+
+  if (!logged) return <div>User not logged</div>;
+
   return (
     <header className="header-container">
       <div>
@@ -22,8 +45,3 @@ function Header({ name, logOutUser }) {
 }
 
 export default Header;
-
-Header.propTypes = {
-  name: PropTypes.string.isRequired,
-  logOutUser: PropTypes.func.isRequired,
-};

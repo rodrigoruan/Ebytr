@@ -1,7 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
-import { decodeToken } from 'react-jwt';
 
 import { sortByDate, sortByLetter, sortByStatus } from '../api/sortTasks';
 import addTask from '../api/addTask';
@@ -19,11 +17,8 @@ import '../css/Home.css';
 
 function Home() {
   const [data, setData] = React.useState(null);
-  const [logged, setLogged] = React.useState(false);
   const [taskDescription, setTaskDescription] = React.useState('');
-  const [name, setName] = React.useState('');
   const [refresh, setRefresh] = React.useState(false);
-  const history = useHistory();
 
   const fetchTasks = () => axios
     .get('https://ebytr-rodrigo.herokuapp.com')
@@ -33,21 +28,6 @@ function Home() {
     fetchTasks();
   }, []);
 
-  React.useEffect(() => {
-    const token = localStorage.getItem('token');
-    const decoded = decodeToken(token);
-    if (token && decoded) {
-      setLogged(true);
-      setName(decoded.data.name);
-    }
-  }, []);
-
-  const logOutUser = () => {
-    localStorage.clear();
-    setLogged(false);
-    history.push('/');
-  };
-
   const verifyAndAddTask = () => {
     if (taskDescription) {
       addTask(taskDescription, fetchTasks);
@@ -56,11 +36,10 @@ function Home() {
   };
 
   if (!data) return <div>Loading...</div>;
-  if (!logged) return <div>User not logged</div>;
 
   return (
     <div>
-      <Header name={name} logOutUser={logOutUser} />
+      <Header />
 
       <hr />
 

@@ -26,7 +26,7 @@ function Modal({
 
       <p>{`${task} / ${status}`}</p>
 
-      <p className="modal-error">{error}</p>
+      <p id="modal-error">{error}</p>
 
       <input
         placeholder="New description"
