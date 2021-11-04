@@ -1,9 +1,9 @@
 const { ObjectID } = require('mongodb');
 const connection = require('./connection');
 
-const getAllTasks = async () => connection().then((db) => db.collection('tasks').find().toArray());
+const getAllTasks = () => connection().then((db) => db.collection('tasks').find().toArray());
 
-const addTask = async (description, name, email, momentDate) => connection()
+const addTask = (description, name, email, momentDate) => connection()
   .then((db) => db.collection('tasks').insertOne({
     description,
     name,
@@ -18,11 +18,11 @@ const addTask = async (description, name, email, momentDate) => connection()
     momentDate,
   }));
 
-const deleteTask = async (id) => connection()
+const deleteTask = (id) => connection()
   .then((db) => db.collection('tasks').deleteOne({ _id: ObjectID(id) }))
   .then(() => ({ id }));
 
-const editTask = async (id, description, name, status) => connection()
+const editTask = (id, description, name, status) => connection()
   .then((db) => db
     .collection('tasks')
     .findOneAndUpdate(

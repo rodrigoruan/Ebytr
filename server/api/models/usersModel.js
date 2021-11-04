@@ -1,12 +1,12 @@
 const connection = require('./connection');
 
-const getAllUsers = async () => connection().then((db) => db.collection('users').find().toArray());
+const getAllUsers = () => connection().then((db) => db.collection('users').find().toArray());
 
-const createUser = async (email, name, password) => connection()
+const createUser = (email, name, password) => connection()
   .then((db) => db.collection('users').insertOne({ email, name, password }))
   .then((response) => ({ id: response.insertedId, email, name }));
 
-const loginUser = async (email, password) => connection().then((db) => db.collection('users').findOne({ email, password }));
+const loginUser = (email, password) => connection().then((db) => db.collection('users').findOne({ email, password }));
 
 const insertAdminUser = ({ name, email, password }) => connection()
   .then((db) => db.collection('users').insertOne({
@@ -17,7 +17,7 @@ const insertAdminUser = ({ name, email, password }) => connection()
   }))
   .then((response) => ({ id: response.insertedId, name, email }));
 
-const getAllAdmins = async () => connection().then((db) => db.collection('users').find({ admin: true }).toArray());
+const getAllAdmins = () => connection().then((db) => db.collection('users').find({ admin: true }).toArray());
 
 module.exports = {
   createUser,
