@@ -35,9 +35,9 @@ function Home() {
 
   React.useEffect(() => {
     const token = localStorage.getItem('token');
-    if (token) {
+    const decoded = decodeToken(token);
+    if (token && decoded) {
       setLogged(true);
-      const decoded = decodeToken(token);
       setName(decoded.data.name);
     }
   }, []);

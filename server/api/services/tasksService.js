@@ -25,7 +25,7 @@ const deleteTask = async (id, token) => {
   const decodedJwt = jwt.verify(token, SECRET).data;
   const { email } = decodedJwt;
 
-  if (userOwnsTaskOrIsAdmin(id, email) || validateData(id, token)) {
+  if (await userOwnsTaskOrIsAdmin(id, email) || validateData(id, token)) {
     return errorMessage;
   }
 
@@ -38,7 +38,7 @@ const editTask = async (id, description, token, status) => {
   const decodedJwt = jwt.verify(token, SECRET).data;
   const { email, name } = decodedJwt;
 
-  if (userOwnsTaskOrIsAdmin(id, email) || validateData(id, email, name, status)) {
+  if (await userOwnsTaskOrIsAdmin(id, email) || validateData(id, email, name, status)) {
     return errorMessage;
   }
 

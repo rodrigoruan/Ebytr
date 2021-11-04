@@ -4,7 +4,10 @@ const { validateData, validateEmailFormat } = require('../validations/validation
 const errorMessage = { error: 'invalid data' };
 
 const createUser = async (email, name, password) => {
-  if (validateData(email, name, password) || validateEmailFormat(email)) {
+  const getAllUsers = await models.getAllUsers();
+  const userExists = getAllUsers.some((user) => user.name === name || user.email === email);
+
+  if (validateData(email, name, password) || validateEmailFormat(email) || userExists) {
     return errorMessage;
   }
 

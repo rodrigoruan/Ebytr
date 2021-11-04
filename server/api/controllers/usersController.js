@@ -14,7 +14,6 @@ routes.post('/create', async (req, res) => {
   const response = await services.createUser(email, name, password);
 
   const CODE = response.error ? 400 : 200;
-
   res.status(CODE).json(response);
 });
 

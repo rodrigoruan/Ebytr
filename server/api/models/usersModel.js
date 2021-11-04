@@ -1,5 +1,7 @@
 const connection = require('./connection');
 
+const getAllUsers = async () => connection().then((db) => db.collection('users').find().toArray());
+
 const createUser = async (email, name, password) => connection()
   .then((db) => db.collection('users').insertOne({ email, name, password }))
   .then((response) => ({ id: response.insertedId, email, name }));
@@ -22,4 +24,5 @@ module.exports = {
   loginUser,
   getAllAdmins,
   insertAdminUser,
+  getAllUsers,
 };
