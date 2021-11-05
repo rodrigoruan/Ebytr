@@ -39,7 +39,7 @@
   display: flex;
   justify-content: center;
   margin: 10px 0;
-  max-width: 100%;
+  max-width: 91%;
 }
 
 .task-input-container > input {
