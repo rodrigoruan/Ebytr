@@ -1,24 +1,21 @@
 /* eslint-disable consistent-return */
-
-const express = require('express');
-
-const routes = express.Router();
 const jwt = require('jsonwebtoken');
 
 const { SECRET } = process.env;
 
 const services = require('../services/usersService');
 
-routes.post('/create', async (req, res) => {
+const createUser = async (req, res) => {
   const { email, name, password } = req.body;
 
   const response = await services.createUser(email, name, password);
 
   const CODE = response.error ? 400 : 200;
-  res.status(CODE).json(response);
-});
 
-routes.post('/login', async (req, res) => {
+  res.status(CODE).json(response);
+};
+
+const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   const response = await services.loginUser(email, password);
@@ -31,6 +28,9 @@ routes.post('/login', async (req, res) => {
   );
 
   res.status(200).json(token);
-});
+};
 
-module.exports = routes;
+module.exports = {
+  createUser,
+  loginUser,
+};
